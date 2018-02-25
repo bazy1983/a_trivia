@@ -1,1 +1,7 @@
-console.log (myQuestions)
+$(document).ready(function (){
+
+    
+
+
+
+});

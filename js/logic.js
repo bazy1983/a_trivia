@@ -1,8 +1,12 @@
 $(document).ready(function (){
-    
+    $(".start").on ("click", function(){
+        $(this).fadeOut();
     var time = 10,
         arrIndex = 0,
-        arrAnswer = [];
+        arrAnswer = [],
+        correctAnswer = 0,
+        incorrectAnswer = 0,
+        unanswered = 0;
         $(".circle_animation").css("stroke-dashoffset", 0);
         $("h3").text(time);
         
@@ -32,13 +36,12 @@ $(document).ready(function (){
             
             time --;
             $(".circle_animation").css("stroke-dashoffset", (10-time)*189/10)
-            console.log($(".circle_animation").css("stroke-dashoffset"))
+            
             $("h3").text(time); // pass the time to document
                 if (time === 0){ //when time is up
                     questionExpired();
                 } 
-        }, 1000);
-        console.log(interval) 
+        }, 1000); 
 }
 
     // ##### question get expired or an answer is clicked #####
@@ -56,7 +59,7 @@ $(document).ready(function (){
     };
 
    
-    $(".choices").on("click", "p", function(){ // ###### ON CLICK EVENT
+    $(".choices").on("click", "button", function(){ // ###### ON CLICK EVENT
         arrAnswer[$(this).attr("value")] = $(this).text(); // add that answer to array
         questionExpired();
     });
@@ -72,14 +75,28 @@ $(document).ready(function (){
             
             $("h3").text(time); 
             countdown()
-        } else { // when run out of questions
+        } else { // #### when run out of questions ####
             $(".choices").empty();
-            $(".question").html("<p class = 'lead'>no more questions</p>");
+            $(".question").html("<p class = 'lead font-weight-bold'>Thank you</p>");
             console.log(arrAnswer)
+            for (var i = 0; i< arrAnswer.length; i++){
+                if (arrAnswer[i] == "") {
+                    unanswered++;
+                }else if (arrAnswer[i] === myQuestions[i].correct){
+                    correctAnswer++
+                } else {
+                    incorrectAnswer++
+                }
+            }
+            // Passing results 
+            $(".answer").html ("<p class = 'lead'>Unanswered: " + unanswered + "</p>"+
+                                "<p class = 'lead'>Correct Answers: " + correctAnswer + "</p>"+
+                                "<p class = 'lead'>Incorrect Answers: " + incorrectAnswer + "</p>")
+            $(".timeCircle").fadeOut();
             //here goes the final calculations
         };
     };
 
     countdown()
-    
+});
 });

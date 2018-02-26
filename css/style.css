@@ -2,9 +2,15 @@ body {
     background: #CCC;
     
 }
+h1 {
+    font-family: 'Lobster', cursive;
+}
 
 .q_container{
     height: 335px;
+}
+.question {
+    padding-top: 15px;
 }
 
 .bg-light {
@@ -22,7 +28,40 @@ body {
  font-weight: bold;
 }
 
+.box_height {
+    height: 300px;
+}
 
+.start {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.425);
+}
+
+.st_circle {
+    position: absolute;
+    top: 46%;
+    left: 45%;
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    font-size: 50px;
+    background: var(--teal);
+    color: #FFF;
+    border-radius: 100%;
+    animation: glow 2s infinite;
+}
+
+@keyframes glow {
+    0% , 100% {
+        filter: drop-shadow(0 0 0 var(--green))
+    }
+    50% {
+        filter: drop-shadow(0 0 25px var(--green))
+    }
+}
 
 
 /*time circle style START*/

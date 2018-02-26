@@ -3,12 +3,29 @@ body {
     
 }
 
+.q_container{
+    height: 335px;
+}
+
+.bg-light {
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+.btn-success {
+    width: 200px;
+    margin: 10px;
+}
+
+.correct { /*style correct answer*/
+ font-style: italic;
+ font-weight: bold;
+}
 
 
 
 
-
-/*time circle style*/
+/*time circle style START*/
 .timeCircle {
     position: relative;
     float: left;
@@ -30,3 +47,4 @@ svg {
   stroke-dashoffset: 0;
   transition: all 0.3s linear;
 }
+/*time circle style END*/

@@ -5,17 +5,18 @@ $(document).ready(function (){
         arrAnswer = [];
         $(".circle_animation").css("stroke-dashoffset", 0);
         $("h3").text(time);
-        $(".timer").html(time);
+        
 
         for (var i = 0; i <myQuestions.length; i++){ //adds empty string values to array
             arrAnswer[i] = "";
         }
 
-    function passQuestion (i) {// pass aquestion and choices to document
+        // ##### load aquestion and choices to document #####
+    function passQuestion (i) {
         $(".question").html(myQuestions[i].question); 
 
         for (var ai = 0; ai < myQuestions[i].answers.length; ai++){ 
-            var myAnswers = $("<p class = 'lead' value = '"+myQuestions[i].name+"'>" + myQuestions[i].answers[ai] + "</p>");
+            var myAnswers = $("<button class = 'btn btn-success' value = '"+myQuestions[i].name+"'>" + myQuestions[i].answers[ai] + "</button><br>");
             $(".choices").append(myAnswers);
         }
     };
@@ -32,8 +33,7 @@ $(document).ready(function (){
             time --;
             $(".circle_animation").css("stroke-dashoffset", (10-time)*189/10)
             console.log($(".circle_animation").css("stroke-dashoffset"))
-            $(".timer").html(time) // pass the time to document
-            $("h3").text(time);
+            $("h3").text(time); // pass the time to document
                 if (time === 0){ //when time is up
                     questionExpired();
                 } 
@@ -41,12 +41,12 @@ $(document).ready(function (){
         console.log(interval) 
 }
 
-
-    questionExpired = function () { //question get expired or an answer is clicked
+    // ##### question get expired or an answer is clicked #####
+    questionExpired = function () { 
         clearInterval(interval);
         
         $(".choices").empty();
-        $(".choices").html("<p class ='lead'>The correct answer is: " + myQuestions[arrIndex].correct +"</p>");
+        $(".choices").html("<p class ='lead'>The correct answer is: <span class = 'correct'>" + myQuestions[arrIndex].correct +"</span></p>");
         
         setTimeout ( function() {
         $(".circle_animation").css("stroke-dashoffset", 0);
@@ -69,7 +69,7 @@ $(document).ready(function (){
             $(".choices").empty();
             passQuestion(arrIndex);
             time = 10
-            $(".timer").html(time);
+            
             $("h3").text(time); 
             countdown()
         } else { // when run out of questions

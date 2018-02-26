@@ -1,8 +1,11 @@
 $(document).ready(function (){
     
-    var time = 11,
+    var time = 10,
         arrIndex = 0,
         arrAnswer = [];
+        $(".circle_animation").css("stroke-dashoffset", 0);
+        $("h3").text(time);
+        $(".timer").html(time);
 
         for (var i = 0; i <myQuestions.length; i++){ //adds empty string values to array
             arrAnswer[i] = "";
@@ -22,12 +25,15 @@ $(document).ready(function (){
     var countdown,
         questionExpired,
         interval;
-
+    
     function countdown() {
        interval = setInterval (function(){ //counter for each question
+            
             time --;
-
+            $(".circle_animation").css("stroke-dashoffset", (10-time)*189/10)
+            console.log($(".circle_animation").css("stroke-dashoffset"))
             $(".timer").html(time) // pass the time to document
+            $("h3").text(time);
                 if (time === 0){ //when time is up
                     questionExpired();
                 } 
@@ -38,10 +44,13 @@ $(document).ready(function (){
 
     questionExpired = function () { //question get expired or an answer is clicked
         clearInterval(interval);
+        
         $(".choices").empty();
         $(".choices").html("<p class ='lead'>The correct answer is: " + myQuestions[arrIndex].correct +"</p>");
         
         setTimeout ( function() {
+        $(".circle_animation").css("stroke-dashoffset", 0);
+           
             resetAll();
         }, 2000);
     };
@@ -60,7 +69,8 @@ $(document).ready(function (){
             $(".choices").empty();
             passQuestion(arrIndex);
             time = 10
-            $(".timer").html(time)
+            $(".timer").html(time);
+            $("h3").text(time); 
             countdown()
         } else { // when run out of questions
             $(".choices").empty();
